@@ -23,9 +23,14 @@ export default function Info({ username }) {
 }
 
 export const getStaticProps = async () => {
-    return {
-        props: {
-            username: 'Alex'
-        }
-    }
+    return fetch('http://localhost:3000/api/hello')
+        .then(res => res.json())
+        .then(response => {
+            const {username} = response;
+            return {
+                props: {
+                    username
+                }
+            };
+        })
 }
