@@ -35,6 +35,12 @@
   align-items: center;
 }
 
+.nav {
+  color: #0070f3;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;
