@@ -38,7 +38,7 @@ export default function Home() {
           <h2>Developed with Next.js!</h2>
           <div>
           {
-            user === null ?
+            user === null &&
               <Button onClick={handleClick}>
                 <Github
                   fill={colors.white}
@@ -47,7 +47,9 @@ export default function Home() {
                 />
                 Login with Github
               </Button>
-            :
+          }
+          {
+            user && user.avatar &&
               <div>
                 <img src={user.avatar} />
                 <strong>{user.username}</strong>

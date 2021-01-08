@@ -35,6 +35,5 @@ export const loginWithGithub = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider();
     return firebase
         .auth()
-        .signInWithPopup(githubProvider)
-        .then(user => mapUserFromFirebaseAuthToUser(user));
+        .signInWithPopup(githubProvider);
 }
