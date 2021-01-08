@@ -1,11 +1,29 @@
+import {useState, useEffect} from 'react';
 import Head from 'next/head'
 import AppLayout from '../components/AppLayout'
 import Button from '../components/Button'
 import Github from '../components/Icons/Github'
+import { loginWithGithub, onAuthStateChanged } from '../firebase/client';
 
 import { colors } from '../styles/theme'
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(setUser)
+  }, []);
+
+  const handleClick = () => {
+    loginWithGithub()
+      .then(user => {
+        const { avatar, username, url } = user;
+        setUser(user);
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
   return (
     <div>
       <Head>
@@ -19,14 +37,22 @@ export default function Home() {
           <h1>Twitter</h1>
           <h2>Developed with Next.js!</h2>
           <div>
-            <Button>
-              <Github 
-                fill={colors.white}
-                width={24}
-                height={24}
-              />
-              Login with Github
-            </Button>
+          {
+            user === null ?
+              <Button onClick={handleClick}>
+                <Github
+                  fill={colors.white}
+                  width={24}
+                  height={24}
+                />
+                Login with Github
+              </Button>
+            :
+              <div>
+                <img src={user.avatar} />
+                <strong>{user.username}</strong>
+              </div>
+          }
           </div>
         </section>
       </AppLayout>
