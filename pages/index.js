@@ -1,28 +1,28 @@
-import {useState, useEffect} from 'react';
-import Head from 'next/head'
-import AppLayout from '../components/AppLayout'
-import Button from '../components/Button'
-import Github from '../components/Icons/Github'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import AppLayout from '../components/AppLayout';
+import Button from '../components/Button';
+import Github from '../components/Icons/Github';
 import { loginWithGithub, onAuthStateChanged } from '../firebase/client';
 
-import { colors } from '../styles/theme'
+import { colors } from '../styles/theme';
 
 export default function Home() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanged(setUser)
+    onAuthStateChanged(setUser);
   }, []);
 
   const handleClick = () => {
     loginWithGithub()
-      .then(user => {
+      .then((user) => {
         const { avatar, username, url } = user;
         setUser(user);
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   return (
     <div>
@@ -33,12 +33,13 @@ export default function Home() {
 
       <AppLayout>
         <section>
-          <img src="/twitter-logo.png" />
+          <img src="/twitter-logo.png" alt="Alt" text="Text" />
           <h1>Twitter</h1>
           <h2>Developed with Next.js!</h2>
           <div>
-          {
-            user === null &&
+            {
+            user === null
+              && (
               <Button onClick={handleClick}>
                 <Github
                   fill={colors.white}
@@ -47,19 +48,23 @@ export default function Home() {
                 />
                 Login with Github
               </Button>
+              )
           }
-          {
-            user && user.avatar &&
+            {
+            user && user.avatar
+              && (
               <div>
-                <img src={user.avatar} />
+                <img src={user.avatar} alt="Alt" text="Text" />
                 <strong>{user.username}</strong>
               </div>
+              )
           }
           </div>
         </section>
       </AppLayout>
 
-      <style jsx>{`
+      <style jsx>
+        {`
         img {
           width: 120px;
         }
@@ -86,7 +91,8 @@ export default function Home() {
         div {
           margin-top: 16px;
         }
-      `}</style>
+      `}
+      </style>
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import css from 'styled-jsx/css'
+import css from 'styled-jsx/css';
 
 import { breakpoints, colors, fonts } from '../../styles/theme';
 
@@ -23,7 +23,7 @@ export const globalStyles = css.global`
     * {
         box-sizing: border-box;
     }
-`
+`;
 
 export default css`
     div {
@@ -46,4 +46,4 @@ export default css`
             width: ${breakpoints.mobile}
         }
     }
-`
+`;
