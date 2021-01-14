@@ -12,6 +12,10 @@ npm run dev
 # or
 yarn dev
 ```
+## Stack
+- Next.js
+- Firebase
+- Vercel
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
