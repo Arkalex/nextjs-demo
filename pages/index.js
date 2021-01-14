@@ -6,6 +6,7 @@ import Github from '../components/Icons/Github';
 import { loginWithGithub, onAuthStateChanged } from '../firebase/client';
 
 import { colors } from '../styles/theme';
+import Avatar from '../components/Avatar';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -16,10 +17,11 @@ export default function Home() {
 
   const handleClick = () => {
     loginWithGithub()
-      .then((user) => {
-        const { avatar, username, url } = user;
-        setUser(user);
-      }).catch((error) => {
+      .then((userRes) => {
+        //  const { avatar, username, url } = user;
+        setUser(userRes);
+      })
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -28,37 +30,31 @@ export default function Home() {
     <div>
       <Head>
         <title>Next.js Twitter</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <AppLayout>
         <section>
-          <img src="/twitter-logo.png" alt="Alt" text="Text" />
+          <img src='/twitter-logo.png' alt='Alt' text='Text' />
           <h1>Twitter</h1>
           <h2>Developed with Next.js!</h2>
           <div>
-            {
-            user === null
-              && (
+            {user === null && (
               <Button onClick={handleClick}>
-                <Github
-                  fill={colors.white}
-                  width={24}
-                  height={24}
-                />
+                <Github fill={colors.white} width={24} height={24} />
                 Login with Github
               </Button>
-              )
-          }
-            {
-            user && user.avatar
-              && (
+            )}
+            {user && user.avatar && (
               <div>
-                <img src={user.avatar} alt="Alt" text="Text" />
+                <Avatar
+                  alt={user.username}
+                  src={user.avatar}
+                  text={user.username}
+                />
                 <strong>{user.username}</strong>
               </div>
-              )
-          }
+            )}
           </div>
         </section>
       </AppLayout>

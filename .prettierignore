@@ -1,0 +1,3 @@
+.next
+# Everything is ignored due some problems with Prettier when I run --check and --write
+*
