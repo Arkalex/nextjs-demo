@@ -20,4 +20,12 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     quotes: [2, 'single', { avoidEscape: true }],
   },
+  settings: {
+    'import/resolver': {
+      'node': {
+        'paths': ['src'],
+        'extensions': ['.js', '.jsx', '.ts', '.tsx']
+      }
+    },
+  },
 };
