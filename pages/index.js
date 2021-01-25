@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import AppLayout from '@c/AppLayout';
+import AppLayout from 'components/AppLayout';
 import Button from 'components/Button';
 import Github from 'components/Icons/Github';
 import { loginWithGithub, onAuthStateChanged } from 'firebase/client';
